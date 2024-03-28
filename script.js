@@ -6,7 +6,7 @@ class App {
         this.$equalBtn = document.querySelector('.equal--btn');
         this.$dotBtn = document.querySelector('.dot--btn');
 
-        this.firstNumber = '';
+        this.firstNumber = ''; 
         this.secondNumber = '';
         this.operation = '';
 
@@ -54,11 +54,15 @@ class App {
     }
 
     updateDisplay(value) {
-        this.$displayEl.textContent = value;
+        const maxDisplayLength = 7;
+        
+        if (value.length <= maxDisplayLength) {
+            this.$displayEl.textContent = value;
+        }
     }
 
     clearDisplay() {
-        this.updateDisplay('0');
+        this.updateDisplay('');
         this.firstNumber = '';
         this.secondNumber = '';
         this.operation = '';
@@ -68,7 +72,9 @@ class App {
         let result;
         const num1 = parseFloat(this.firstNumber);
         const num2 = parseFloat(this.secondNumber);
-        
+      
+        if (!num1 || !num2) return;
+
         switch (this.operation) {
             case '+':
                 result = num1 + num2;
@@ -80,13 +86,17 @@ class App {
                 result = num1 * num2;
                 break;
             case '/':
-                result = num1 / num2;
+                if (num2 !== 0) {
+                    result = num1 / num2;
+                } else {
+                    result = "Error";
+                }
                 break;
             default:
                 result = num1;
         }
         
-        this.updateDisplay(result);
+        this.updateDisplay(result.toString());
         
         this.firstNumber = result.toString();
         this.secondNumber = '';
