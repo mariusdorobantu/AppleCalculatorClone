@@ -1,4 +1,4 @@
-# DigitalCalculator # # / last update February 2024
+# DigitalCalculator #  / last update February 2024
 #####################
 
 About:
